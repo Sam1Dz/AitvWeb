@@ -4,7 +4,7 @@
 
 @media screen and (max-width: 899px) {
   .logo {
-    width: 12rem;
+    width: 13rem;
     margin: auto;
     text-align: center;
     position: absolute;
@@ -12,4 +12,9 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+}
+
+/* OVERWRITE MATERIAL UI CSS RULES */
+.control-theme .css-518kzi-MuiListItemSecondaryAction-root {
+  right: -20px !important;
 }

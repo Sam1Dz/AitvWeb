@@ -64,7 +64,7 @@ export default function AppBase(props) {
       <Toolbar />
       <Container>
         <Box sx={{ my: 2 }}>
-          <p>Contoh Text</p>
+          <p>Contoh Konten!</p>
         </Box>
       </Container>
     </ThemeProvider>

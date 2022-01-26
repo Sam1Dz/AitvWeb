@@ -1,69 +1,41 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import {
   IconButton,
   Toolbar,
   Box,
-  FormGroup,
-  FormControlLabel,
-  Switch,
+  Button,
+  Drawer,
+  Divider,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import "../../css/styles.css";
+
+// IMPORT : COMPONENTS
+import RenderDrawer from "./drawer";
+import RenderControlTheme from "./controlTheme";
 
 // IMPORT : ICONS
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
 
 // IMPORT : IMAGES
 import AITVLogo from "../../assets/images/logo-long.png";
 
-const DarkModeSwitch = styled(Switch)(({ theme }) => ({
-  width: 60,
-  height: 33,
-  padding: 7,
-  "& .MuiSwitch-switchBase": {
-    margin: 1,
-    padding: 0,
-    transform: "translateX(6px)",
-    "&.Mui-checked": {
-      color: "#fff",
-      transform: "translateX(22px)",
-      "& .MuiSwitch-thumb:before": {
-        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-          "#fff"
-        )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`,
-      },
-      "& + .MuiSwitch-track": {
-        opacity: 1,
-        backgroundColor: theme.palette.mode === "dark" ? "#212121" : "#424242",
-      },
-    },
-  },
-  "& .MuiSwitch-thumb": {
-    backgroundColor: theme.palette.mode === "dark" ? "#424242" : "#757575",
-    width: 32,
-    height: 32,
-    "&:before": {
-      content: "''",
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      left: 0,
-      top: 0,
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
-      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-        "#fff"
-      )}" d="M9.305 1.667V3.75h1.389V1.667h-1.39zm-4.707 1.95l-.982.982L5.09 6.072l.982-.982-1.473-1.473zm10.802 0L13.927 5.09l.982.982 1.473-1.473-.982-.982zM10 5.139a4.872 4.872 0 00-4.862 4.86A4.872 4.872 0 0010 14.862 4.872 4.872 0 0014.86 10 4.872 4.872 0 0010 5.139zm0 1.389A3.462 3.462 0 0113.471 10a3.462 3.462 0 01-3.473 3.472A3.462 3.462 0 016.527 10 3.462 3.462 0 0110 6.528zM1.665 9.305v1.39h2.083v-1.39H1.666zm14.583 0v1.39h2.084v-1.39h-2.084zM5.09 13.928L3.616 15.4l.982.982 1.473-1.473-.982-.982zm9.82 0l-.982.982 1.473 1.473.982-.982-1.473-1.473zM9.305 16.25v2.083h1.389V16.25h-1.39z"/></svg>')`,
-    },
-  },
-  "& .MuiSwitch-track": {
-    opacity: 1,
-    backgroundColor: theme.palette.mode === "dark" ? "#212121" : "#424242",
-    borderRadius: 20 / 2,
-  },
-}));
-
 export default function Header(props) {
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  /* FUNCTION COMPONENTS */
+  const toggleDrawer = (isOpen) => (event) => {
+    if (
+      event &&
+      event.type === "keydown" &&
+      (event.key === "tab" || event.key === "shift")
+    ) {
+      return;
+    }
+
+    setOpenDrawer(isOpen);
+  };
+
   return (
     <Fragment>
       <Toolbar>
@@ -74,6 +46,7 @@ export default function Header(props) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={toggleDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -85,23 +58,64 @@ export default function Header(props) {
           style={{ filter: `invert(${props.isDarkMode ? 1 : 0})` }}
         />
 
-        {/* RIGHT NAVIGATION BAR */}
+        {/* MENU NAVIGATION */}
         <Box sx={{ flexGrow: 1 }} />
+        <Box
+          sx={{ display: { xs: "none", md: "flex" } }}
+          style={{ marginLeft: 12 }}
+        >
+          <Button key="News" sx={{ my: 2, color: "inherit", display: "block" }}>
+            News
+          </Button>
+          <Button
+            key="Trivia"
+            sx={{ my: 2, color: "inherit", display: "block" }}
+          >
+            Trivia
+          </Button>
+          <Button
+            key="Chord"
+            sx={{ my: 2, color: "inherit", display: "block" }}
+          >
+            Chord
+          </Button>
+        </Box>
+
+        {/* SEARCH */}
+        <Box sx={{ display: { xs: "flex" } }}>
+          <IconButton size="large" aria-label="search article" color="inherit">
+            <SearchIcon />
+          </IconButton>
+        </Box>
+
+        {/* RIGHT NAVIGATION BAR */}
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <DarkModeSwitch
-                  sx={{ m: 1 }}
-                  checked={props.isDarkMode}
-                  onChange={(e) => props.toggleMode(e.target.checked)}
-                />
-              }
-              label=""
-            />
-          </FormGroup>
+          <Divider
+            orientation="vertical"
+            variant="middle"
+            flexItem
+            style={{ marginLeft: 12, marginRight: 12 }}
+          />
+          <RenderControlTheme
+            isDarkMode={props.isDarkMode}
+            toggleMode={(e) => props.toggleMode(e)}
+          />
         </Box>
       </Toolbar>
+
+      {/* DRAWER */}
+      <Drawer
+        anchor="left"
+        open={openDrawer}
+        onOpen={toggleDrawer(true)}
+        onClose={toggleDrawer(false)}
+      >
+        <RenderDrawer
+          toggleDrawer={(isOpen) => toggleDrawer(isOpen)}
+          isDarkMode={props.isDarkMode}
+          toggleMode={(e) => props.toggleMode(e)}
+        />
+      </Drawer>
     </Fragment>
   );
 }
