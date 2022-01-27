@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { NavLink } from "react-router-dom";
 import { Box, Divider, List, ListItem, ListItemText } from "@mui/material";
 
 // IMPORT : COMPONENTS
@@ -10,7 +11,6 @@ export default function Drawer(props) {
       <Box
         sx={{ width: 250 }}
         role="presentation"
-        // onClick={props.toggleDrawer(false)}
         onKeyDown={props.toggleDrawer(false)}
       >
         <List>
@@ -29,9 +29,15 @@ export default function Drawer(props) {
         </List>
         <Divider />
         <List>
-          <ListItem button key="News">
-            <ListItemText primary="News" />
-          </ListItem>
+          <NavLink
+            to="/test"
+            style={{ textDecoration: "none", color: "unset" }}
+            onClick={props.toggleDrawer(false)}
+          >
+            <ListItem button key="News">
+              <ListItemText primary="News" />
+            </ListItem>
+          </NavLink>
           <ListItem button key="Trivia">
             <ListItemText primary="Trivia" />
           </ListItem>

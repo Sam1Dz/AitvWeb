@@ -2,14 +2,15 @@ import React, { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 
-import AppBase from "./components/app/appBase";
+import App from "./App";
 
 /* IMPORT : CSS */
 import "./index.css";
+import "./assets/css/styles.css";
 
 ReactDOM.render(
   <StrictMode>
-    <AppBase />
+    <App />
   </StrictMode>,
   document.getElementById("root")
 );

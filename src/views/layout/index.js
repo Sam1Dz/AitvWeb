@@ -1,5 +1,10 @@
 import React, { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
+
+// IMPORT : REACT ROUTER DOM
+import { Outlet as RenderContent } from "react-router-dom";
+
+// IMPORT : MATERAIL UI
 import {
   AppBar,
   Box,
@@ -12,8 +17,8 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// IMPORT :COMPONENTS
-import Header from "../header";
+// IMPORT : COMPONENTS
+import Header from "../../components/header";
 
 function HideOnScroll({ children, window }) {
   const trigger = useScrollTrigger({
@@ -32,7 +37,7 @@ HideOnScroll.propTypes = {
   window: PropTypes.func,
 };
 
-export default function AppBase(props) {
+export default function Layout(props) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const [mode, setMode] = useState(false);
@@ -61,10 +66,12 @@ export default function AppBase(props) {
           </Container>
         </AppBar>
       </HideOnScroll>
+
+      {/* CONTENT */}
       <Toolbar />
       <Container>
         <Box sx={{ my: 2 }}>
-          <p>Contoh Konten!</p>
+          <RenderContent />
         </Box>
       </Container>
     </ThemeProvider>

@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   IconButton,
   Toolbar,
@@ -7,7 +8,6 @@ import {
   Drawer,
   Divider,
 } from "@mui/material";
-import "../../css/styles.css";
 
 // IMPORT : COMPONENTS
 import RenderDrawer from "./drawer";
@@ -51,12 +51,15 @@ export default function Header(props) {
             <MenuIcon />
           </IconButton>
         </Box>
-        <img
-          src={AITVLogo}
-          className="logo"
-          alt="logo-long"
-          style={{ filter: `invert(${props.isDarkMode ? 1 : 0})` }}
-        />
+
+        <Link to="/">
+          <img
+            src={AITVLogo}
+            className="logo"
+            alt="logo-long"
+            style={{ filter: `invert(${props.isDarkMode ? 1 : 0})` }}
+          />
+        </Link>
 
         {/* MENU NAVIGATION */}
         <Box sx={{ flexGrow: 1 }} />
@@ -64,9 +67,14 @@ export default function Header(props) {
           sx={{ display: { xs: "none", md: "flex" } }}
           style={{ marginLeft: 12 }}
         >
-          <Button key="News" sx={{ my: 2, color: "inherit", display: "block" }}>
-            News
-          </Button>
+          <Link to="/test" style={{ textDecoration: "none", color: "unset" }}>
+            <Button
+              key="News"
+              sx={{ my: 2, color: "inherit", display: "block" }}
+            >
+              News
+            </Button>
+          </Link>
           <Button
             key="Trivia"
             sx={{ my: 2, color: "inherit", display: "block" }}
