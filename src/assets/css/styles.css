@@ -12,6 +12,15 @@
   margin: auto;
 }
 
+/* OVERWRITE MATERIAL UI CSS RULES */
+.control-theme .css-518kzi-MuiListItemSecondaryAction-root {
+  right: -20px !important;
+}
+
+/* .carousel {
+  height: 265px !important;
+} */
+
 @media screen and (max-width: 899px) {
   .logo {
     width: 13rem;
@@ -32,9 +41,9 @@
     bottom: 0;
     margin: auto;
   }
-}
 
-/* OVERWRITE MATERIAL UI CSS RULES */
-.control-theme .css-518kzi-MuiListItemSecondaryAction-root {
-  right: -20px !important;
+  /* OVERWRITE MATERIAL UI CSS RULES */
+  .carousel {
+    height: 200px !important;
+  }
 }

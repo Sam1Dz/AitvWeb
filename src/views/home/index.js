@@ -1,5 +1,12 @@
-import React from "react";
+import React, { Fragment } from "react";
+
+// IMPORT : COMPONENTS
+import FeaturedPosts from "./featured";
 
 export default function Home() {
-  return <p>Contoh Konten!</p>;
+  return (
+    <Fragment>
+      <FeaturedPosts />
+    </Fragment>
+  );
 }
